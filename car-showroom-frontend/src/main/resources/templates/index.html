@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Car Showroom</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Car Showroom</h1>
+        <form action="#" th:action="@{/search}" th:object="${search}" method="get" class="form-inline justify-content-center mb-5">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="make" class="sr-only">Make</label>
+                <input type="text" id="make" name="make" th:value="${search.make}" class="form-control" placeholder="Make">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="model" class="sr-only">Model</label>
+                <input type="text" id="model" name="model" th:value="${search.model}" class="form-control" placeholder="Model">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </form>
+
+        <div class="results-section">
+            <h2 class="text-center">Search Results</h2>
+            <ul class="list-group mb-5">
+                <li class="list-group-item" th:if="${price != null}" th:text="'Price: ' + ${price}">Price: Car not found</li>
+                <li class="list-group-item" th:each="car : ${searchResults}" th:text="${car.make} + ' ' + ${car.model} + ' - Price: ' + ${car.price}"></li>
+            </ul>
+
+            <h2 class="text-center">All Cars</h2>
+            <ul class="list-group mb-5">
+                <li class="list-group-item" th:each="car : ${cars}" th:text="${car.make} + ' ' + ${car.model} + ' - Price: ' + ${car.price}"></li>
+            </ul>
+
+            <h2 class="text-center">Showrooms</h2>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="showroom : ${showrooms}" th:text="${showroom.name} + ' - ' + ${showroom.location}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
